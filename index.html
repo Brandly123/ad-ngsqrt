@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Hello world!</title>
+    <link rel="stylesheet" href="/style.css" />
+
+
+    <script src="/js/break-eternity.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/tabs.js"></script>
+    <script src="/js/save.js"></script>
+    
+    <script src="/js/dimSetup.js" defer></script>
+    <script src="/js/main.js" defer></script>
+  </head>
+  <body>
+    <table id="main"><tr><th class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'Dimensions')">Dimensions</button>
+            <button class="tablinks" onclick="openTab(event, 'Paradoxes')">Paradoxes</button>
+            <button class="tablinks" onclick="openTab(event, 'Dimension Shifts')">Dim Shifts</button>
+            <button class="tablinks" onclick="openTab(event, 'Infinity')">Infinity</button>
+        </th>
+        <th>
+        <table><tr id="toptext"><br><br><br><br><br>
+                You have <span class="big" id="antimatter">0</span> antimatter<br>
+                You are gaining <span id="AMS">0</span> antimatter per second<br><br>
+            
+                There is <span class="big" id="matter">0</span> matter
+            </tr>
+        </td><td><div id="Dimensions" class="tabcontent"></div>
+        
+        <div id="Paradoxes" class="tabcontent">
+            You have <span class="big" id="paradoxes">0</span> paradoxes (+<span id="paradoxGain">1</span>)<br>
+            <br>
+            <button onclick="buyParadoxUpgrade(1)">Double antimatter gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(2)">Double paradox gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(3)">+25% stronger ADs (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(4)">+0.1x Buy-10 AD multiplier (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button><br>
+            <button onclick="buyParadoxUpgrade(5)">2x cheaper ADs (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(6)">/3 matter production (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(7)">5x antimatter gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <button onclick="buyParadoxUpgrade(8)">+25% game speed (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
+            <br>
+            <button onclick="toggleUpgradeSix()">Reverse upgrade 6's effect. (free)</button>
+        </div>
+        <div id="Dimension Shifts" class="tabcontent">
+            You have <span class="big" id="dimensionalAmount">0</span> dimensional shifts<br>
+            <br>
+            <button onclick="dimensionShift(true)">Reset all progress for a Dimensional Shift<br>Requirement: <span id="dimensionalCost">...</span></button>
+        </div>
+
+        <div id="Infinity" class="tabcontent">
+           Infinity
+        </div>
+        </table>
+        </th>
+    </tr></table>
+  </body>
+</html>
