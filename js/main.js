@@ -99,7 +99,7 @@ var tickAntimatter = function(dt){
 }
 
 var calcMatter = function(mt){
-    let x = new Decimal(mt).div(175).pow(2.5).add(1)
+    let x = new Decimal(mt).div(180).pow(2.5).add(1)
 
     x = x.div(2).tetrate(2).add(x.pow(2)).sub(1.7).max(0)
 
