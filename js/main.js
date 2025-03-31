@@ -25,8 +25,7 @@ var toggleUpgradeSix = function(){
 function updatePrestigeDisplays(){
     document.getElementById("paradoxes").innerHTML = format(player.paradoxes)
     document.getElementById('dimensionalAmount').innerHTML = format(player.dimensionShifts)
-    if(player.dimensionShifts.equals(0)) document.getElementById('dimensionalCost').innerHTML = format(new Decimal(20))
-    else if(player.dimensionShifts.lt(8)) document.getElementById('dimensionalCost').innerHTML = format(new Decimal(21))
+    if(player.dimensionShifts.lt(8)) document.getElementById('dimensionalCost').innerHTML = format(new Decimal(20))
     else document.getElementById('dimensionalCost').innerHTML = format(new Decimal(8).sub(6.5).mul(20))
 }
 
@@ -72,13 +71,13 @@ function dimensionShift(reset){
     let buyable = false;
 
     if(player.dimensionShifts.equals(0)) if(player.dimensions[1][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(1)) if(player.dimensions[2][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(2)) if(player.dimensions[3][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(3)) if(player.dimensions[4][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(4)) if(player.dimensions[5][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(5)) if(player.dimensions[6][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(6)) if(player.dimensions[7][0].gte(21)) buyable = true;
-    else if(player.dimensionShifts.equals(7)) if(player.dimensions[8][0].gte(21)) buyable = true;
+    else if(player.dimensionShifts.equals(1)) if(player.dimensions[2][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(2)) if(player.dimensions[3][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(3)) if(player.dimensions[4][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(4)) if(player.dimensions[5][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(5)) if(player.dimensions[6][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(6)) if(player.dimensions[7][0].gte(20)) buyable = true;
+    else if(player.dimensionShifts.equals(7)) if(player.dimensions[8][0].gte(20)) buyable = true;
     else if(player.dimensions[8][0].gte(new Decimal(8).sub(6.5).mul(20))) buyable = true;
 
     if(reset && buyable){triggerPrestige(2)}
@@ -111,7 +110,7 @@ var calcMatter = function(mt){
 }
 
 var calculateADCost = function(num){
-    const cost = [10,10,1e4,1e6,1e9,1e13,1e18,1e24];
+    const cost = [10,100,1e4,1e6,1e9,1e13,1e18,1e24];
     const scaling = [1e3,1e4,1e5,1e6,1e8,1e10,1e12,1e15];
 
     return new Decimal(scaling[num-1]).pow(player.dimensions[num][0].div(10).floor()).mul(cost[num-1]).div(new Decimal(2).pow(player.paradoxUpgrades[5]))
