@@ -25,8 +25,8 @@ var toggleUpgradeSix = function(){
 function updatePrestigeDisplays(){
     document.getElementById("paradoxes").innerHTML = format(player.paradoxes)
     document.getElementById('dimensionalAmount').innerHTML = format(player.dimensionShifts)
-    if(player.dimensionShifts.lt(8)) document.getElementById('dimensionalCost').innerHTML = format(new Decimal(20))
-    else document.getElementById('dimensionalCost').innerHTML = format(new Decimal(8).sub(6.5).mul(20))
+    if(player.dimensionShifts.lt(8)) document.getElementById('dimensionalCost').innerHTML = "20x " + player.dimensionShifts.add(1) + "th dimensions"
+    else document.getElementById('dimensionalCost').innerHTML = format(new Decimal(8).sub(6.5).mul(20)) + "x 8th dimensions"
 }
 
 function triggerPrestige(layer){
