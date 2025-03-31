@@ -18,6 +18,7 @@
   <body>
     <table id="main"><tr><th class="tabs">
             <button class="tablinks" onclick="openTab(event, 'Dimensions')">Dimensions</button>
+            <button class="tablinks" onclick="openTab(event, 'Automation')">Automation</button>
             <button class="tablinks" onclick="openTab(event, 'Paradoxes')">Paradoxes</button>
             <button class="tablinks" onclick="openTab(event, 'Dimension Shifts')">Dim Shifts</button>
             <button class="tablinks" onclick="openTab(event, 'Infinity')">Infinity</button>
@@ -37,7 +38,7 @@
             <button onclick="buyParadoxUpgrade(1)">Double antimatter gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
             <button onclick="buyParadoxUpgrade(2)">Double paradox gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
             <button onclick="buyParadoxUpgrade(3)">+25% stronger ADs (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
-            <button onclick="buyParadoxUpgrade(4)">+0.1x Buy-10 AD multiplier (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button><br>
+            <button onclick="buyParadoxUpgrade(4)">+0.20x Buy-10 AD multiplier (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button><br>
             <button onclick="buyParadoxUpgrade(5)">2x cheaper ADs (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
             <button onclick="buyParadoxUpgrade(6)">/3 matter production (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
             <button onclick="buyParadoxUpgrade(7)">5x antimatter gain (<span class="amount">...</span>)<br>Cost: <span class="cost">...</span></button>
@@ -45,10 +46,13 @@
             <br>
             <button onclick="toggleUpgradeSix()">Reverse upgrade 6's effect. (free)</button>
         </div>
+        <div id="Automation" class="tabcontent">
+          <button onclick="toggleAutomation(0)">Automate dimension 1 (since this is in beta it is *FREE*)</button>
+        </div>
         <div id="Dimension Shifts" class="tabcontent">
             You have <span class="big" id="dimensionalAmount">0</span> dimensional shifts<br>
             <br>
-            <button onclick="dimensionShift(true)">Reset all progress for a Dimensional Shift<br>Requirement: <span id="dimensionalCost">...</span></button>
+            <button onclick="dimensionShift(true)" style="width:65%">Reset all progress for a Dimensional Shift<br>Each of them do a 2.5x boost to ADs and a +1x paradox gain<br>Requirement: <span id="dimensionalCost">...</span></button>
         </div>
 
         <div id="Infinity" class="tabcontent">

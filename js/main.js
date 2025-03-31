@@ -1,10 +1,10 @@
 var upgradeSixToggled = true;
 
 var calcADMulti = function(num){
-    return new Decimal(2).add(player.paradoxUpgrades[4].div(10))
+    return new Decimal(2).add(player.paradoxUpgrades[4].div(5))
     .pow(player.dimensions[num][0].div(10).floor())
     .mul(player.paradoxUpgrades[3].div(4).add(1))
-    .mul(new Decimal(2).pow(player.dimensionShifts))
+    .mul(new Decimal(2.5).pow(player.dimensionShifts))
     .div(10000)
 }
 var calcAMMulti = function(){
@@ -67,6 +67,10 @@ function triggerPrestige(layer){
     updatePrestigeDisplays()
 }
 
+function toggleAutomation(num){
+    player.automation[num] = !player.automation[num]
+}
+
 function dimensionShift(reset){
     let buyable = false;
 
@@ -109,11 +113,38 @@ var calcMatter = function(mt){
     return x
 }
 
-var calculateADCost = function(num){
+var calculateADCost = function(num,bulk = 1){
     const cost = [10,100,1e4,1e6,1e9,1e13,1e18,1e24];
     const scaling = [1e3,1e4,1e5,1e6,1e8,1e10,1e12,1e15];
 
-    return new Decimal(scaling[num-1]).pow(player.dimensions[num][0].div(10).floor()).mul(cost[num-1]).div(new Decimal(2).pow(player.paradoxUpgrades[5]))
+    const dims = player.dimensions[num][0].add(bulk).sub(1);
+
+    return new Decimal(scaling[num-1]).pow(dims.div(10).floor()).mul(cost[num-1]).div(new Decimal(2).pow(player.paradoxUpgrades[5]))
+}
+var buyAD = function(num, bulk = new Decimal(1)){
+    if(bulk.gte(1)){
+        const cost = [10,100,1e4,1e6,1e9,1e13,1e18,1e24];
+        const scaling = [1e3,1e4,1e5,1e6,1e8,1e10,1e12,1e15];
+        const maxBuys = player.antimatter.div(cost[num-1]).mul((new Decimal(2).pow(player.paradoxUpgrades[5]))).div(10).ceil().log(scaling[num-1]).mul(10);
+        if(!maxBuys) maxBuys = player.antimatter.div(cost[num-1]).mul((new Decimal(2).pow(player.paradoxUpgrades[5]))).floor()
+
+        bulk = bulk.min(maxBuys.max(1))
+        console.log(bulk)
+    }
+
+    let cost = calculateADCost(num,bulk)
+
+    if(bulk.gte(1)) cost = cost.mul(new Decimal(10-player.dimensions[num][0]%10).min(bulk));
+
+    if(player.antimatter.gte(cost)){
+        player.antimatter = player.antimatter.sub(cost)
+        player.dimensions[num][0] = player.dimensions[num][0].add(bulk)
+        player.dimensions[num][1] = player.dimensions[num][1].add(bulk)
+
+        document.getElementsByClassName("amAmount")[num-1].innerHTML = format(player.dimensions[num][1])
+        document.getElementsByClassName("amBuys")[num-1].innerHTML = format(player.dimensions[num][0])
+        document.getElementsByClassName("amCost")[num-1].innerHTML = format(calculateADCost(num))
+    }
 }
 
 var calculateParadoxUpgradeCost = function(num){
@@ -187,4 +218,6 @@ var myInterval = setInterval(function(){
 
     document.getElementById("paradoxGain").innerHTML = format(calculateGainedParadoxes())
     if(player.matter.gte(player.antimatter)) triggerPrestige(1)
+
+    if(player.automation[0]) buyAD(1)
 }, 10);

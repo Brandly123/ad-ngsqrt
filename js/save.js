@@ -29,7 +29,8 @@ function serializePlayer(player) {
         dimensionShifts: player.dimensionShifts.toString(),
         paradoxTime: player.paradoxTime,
         dimensions: {},
-        paradoxUpgrades: player.paradoxUpgrades.map(upgrade => upgrade.toString()) // Ensure upgrades are serialized
+        paradoxUpgrades: player.paradoxUpgrades.map(upgrade => upgrade.toString()),
+        automatio0n: player.automation.map(upgrade => upgrade.toString()),
     };
 
     // Serialize dimensions (handle arrays of Decimals)
@@ -52,7 +53,8 @@ function deserializePlayer(data) {
         paradoxTime: data.paradoxTime,
         dimensions: {},
         dimensionShifts: new Decimal(data.dimensionShifts),
-        paradoxUpgrades: [] // Initialize as an empty array
+        paradoxUpgrades: [],
+        automation: [],
     };
 
     // Deserialize dimensions (handle arrays of Decimals)
@@ -109,8 +111,12 @@ if (!player) {
             new Decimal(0),
         ],
 
-        dimensionShifts: new Decimal(0)
+        dimensionShifts: new Decimal(0),
+
+        automation: [0,0,0,0,0,0,0,0],
     };
+} else {
+    if(!player.automation) player["automation"] = [0,0,0,0,0,0,0,0]
 }
 
 // Periodically save player data to cookies (every second)
