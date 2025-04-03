@@ -98,6 +98,8 @@ var tickAntimatter = function(dt){
 }
 
 var calcMatter = function(mt){
+    if(mt <= 1){return 0}
+
     let x = new Decimal(mt).div(180).pow(2.5).add(1)
 
     x = x.div(2).tetrate(2).add(x.pow(2)).sub(1).max(0)
@@ -196,7 +198,7 @@ var myInterval = setInterval(function(){
 
     tickAntimatter(dt)
 
-    player.matter = calcMatter(player.paradoxTime)
+    player.matter = calcMatter(player.paradoxTime - 2)
 
     document.getElementById("antimatter").innerHTML = formatSmall(player.antimatter)
     document.getElementById("matter").innerHTML = format(player.matter)
