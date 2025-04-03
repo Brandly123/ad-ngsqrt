@@ -71,20 +71,16 @@ function toggleAutomation(num){
     player.automation[num] = !player.automation[num]
 }
 
-function dimensionShift(reset){
-    let buyable = false;
-
-    if(player.dimensionShifts.equals(0)) if(player.dimensions[1][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(1)) if(player.dimensions[2][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(2)) if(player.dimensions[3][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(3)) if(player.dimensions[4][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(4)) if(player.dimensions[5][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(5)) if(player.dimensions[6][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(6)) if(player.dimensions[7][0].gte(20)) buyable = true;
-    else if(player.dimensionShifts.equals(7)) if(player.dimensions[8][0].gte(20)) buyable = true;
-    else if(player.dimensions[8][0].gte(new Decimal(8).sub(6.5).mul(20))) buyable = true;
-
-    if(reset && buyable){triggerPrestige(2)}
+function dimensionShift(){
+    if(player.dimensionShifts.equals(0)) if(player.dimensions[1][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(1)) if(player.dimensions[2][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(2)) if(player.dimensions[3][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(3)) if(player.dimensions[4][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(4)) if(player.dimensions[5][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(5)) if(player.dimensions[6][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(6)) if(player.dimensions[7][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.equals(7)) if(player.dimensions[8][0].gte(20)) triggerPrestige(2)
+    if(player.dimensionShifts.gte(8)) if(player.dimensions[8][0].gte(new Decimal(8).sub(6.5).mul(20))) triggerPrestige(2)
 }
 
 var tickAntimatter = function(dt){
@@ -129,7 +125,6 @@ var buyAD = function(num, bulk = new Decimal(1)){
         if(!maxBuys) maxBuys = player.antimatter.div(cost[num-1]).mul((new Decimal(2).pow(player.paradoxUpgrades[5]))).floor()
 
         bulk = bulk.min(maxBuys.max(1))
-        console.log(bulk)
     }
 
     let cost = calculateADCost(num,bulk)
